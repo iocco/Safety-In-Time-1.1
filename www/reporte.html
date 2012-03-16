@@ -17,12 +17,13 @@
     var comentario='';
     // Wait for PhoneGap to connect with the device
     //
-
+               var pictureSource; // picture source
+                var destinationType; // sets the format of returned value 
     // PhoneGap is ready to be used!
     //
    function onBodyLoad() {
-        //pictureSource=navigator.camera.PictureSourceType;
-        //destinationType=navigator.camera.DestinationType;
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
         var options = {enableHighAccuracy: true };
         navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
     } 
