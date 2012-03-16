@@ -22,9 +22,14 @@
     // PhoneGap is ready to be used!
     //
    function onDeviceReady() {
+    	alert("1")
         pictureSource=navigator.camera.PictureSourceType;
+    	alert("2")
         destinationType=navigator.camera.DestinationType;
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    	alert("3")
+        var options = {enableHighAccuracy: true };
+    	alert("4")
+        navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
     } 
 
     // Called when a photo is successfully retrieved
@@ -58,7 +63,7 @@
       navigator.camera.getPicture(uploadPhoto, onFail, { quality: 50 });
     }
     function onSuccess(position) {
-
+							alert("6")
          					longitud=position.coords.longitude;
          					latitud=position.coords.latitude;
          					var element = document.getElementById('geolocation');
