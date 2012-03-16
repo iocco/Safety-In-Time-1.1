@@ -24,8 +24,7 @@
    function onDeviceReady() {
         pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
-        var options = {enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
     } 
 
     // Called when a photo is successfully retrieved
