@@ -12,6 +12,11 @@
 
     // PhoneGap is ready
     //
+     function onBodyLoad()
+                {
+                    document.addEventListener("deviceready",onDeviceReady,false);
+                }
+    
     function onDeviceReady() {
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
@@ -39,7 +44,7 @@
 
     </script>
   </head>
-  <body>
+  <body onload="onBodyLoad()">
     <p id="geolocation">Finding geolocation...</p>
   </body>
 </html>
