@@ -17,18 +17,13 @@
     var comentario='';
     // Wait for PhoneGap to connect with the device
     //
-   document.addEventListener("deviceready",onDeviceReady,false);
 
     // PhoneGap is ready to be used!
     //
-   function onDeviceReady() {
-    	alert("1")
+   function onBodyLoad() {
         pictureSource=navigator.camera.PictureSourceType;
-    	alert("2")
         destinationType=navigator.camera.DestinationType;
-    	alert("3")
         var options = {enableHighAccuracy: true };
-    	alert("4")
         navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
     } 
 
@@ -141,7 +136,7 @@
     </script>
 
   </head>
-  <body>
+  <body onload="onBodyLoad()">
       <div id="geolocation">
      <H1> Obteniendo Coordenadas por favor espere...</H1>
 	</div>
