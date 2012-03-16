@@ -8,22 +8,23 @@
 
     // Wait for PhoneGap to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
 
     // PhoneGap is ready
     //
      function onBodyLoad()
                 {
+    				alert("Body Load")
                     document.addEventListener("deviceready",onDeviceReady,false);
                 }
     
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    	alert("Device Ready")
+        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
 
     // onSuccess Geolocation
     //
-    function onSuccess(position) {
+ /*   function onSuccess(position) {
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -40,11 +41,11 @@
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
-    }
+    }*/
 
     </script>
   </head>
-  <body onload="onBodyLoad()">
-    <p id="geolocation">Finding geolocation...</p>
+  <body >
+    <p id="geolocation">Waiting.</p>
   </body>
 </html>
