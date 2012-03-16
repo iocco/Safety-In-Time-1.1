@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Photo</title>
+    <link rel="stylesheet" href="Style.css" type="text/css" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ayuda.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+	var longitud;
+    var latitud;
+    var tipo;
+    var comentario='';
+    // Wait for PhoneGap to connect with the device
+    //
+   document.addEventListener("deviceready",onDeviceReady,false);
+
+    // PhoneGap is ready to be used!
+    //
+   function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+        var options = {enableHighAccuracy: true };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+    } 
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+      // console.log(imageData);
+
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
+
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+
+
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(uploadPhoto, onFail, { quality: 50 });
+    }
+    function onSuccess(position) {
+
+         					longitud=position.coords.longitude;
+         					latitud=position.coords.latitude;
+         					var element = document.getElementById('geolocation');
+         		      		element.innerHTML='<text>Comentario(Opcional)<br></text><form name=f1><textarea id rows="5" cols="30" name="comentario"></textarea><br> <input type="button" value="Ok" onclick="Comentario();"></form>';
+         		      		var ayuda = document.getElementById('ayuda');
+         		     		ayuda.innerHTML="<input type='button' value='?' onclick='ayuda(1);'>";
+         				    
+      
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function setTipo(t){
+    	
+    	tipo=t;
+    	capturePhoto();
+    }
+    
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    // Called if something bad happens.
+    // 
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+    
+  function uploadPhoto(imageURI) {
+	  var element = document.getElementById('geolocation');
+		element.innerHTML='	<H1> Enviando Reporte </H1>';
+        var options = new FileUploadOptions();
+
+        var params = new Object();
+        params.value1 = "test";
+        params.value2 = "param";
+        id=device.uuid;
+        options.params = params;
+        options.chunkedMode = false;
+
+        var ft = new FileTransfer();
+        ft.upload(imageURI, "http://smartpreventions.com/app/upload2.php?longitud="+longitud+"&latitud="+latitud+"&tipo="+tipo+"&comentario="+comentario+"&id="+id, win, fail, options);
+    }
+
+       function win(r) {
+        alert("Subida Correctamente");
+        console.log("Code = " + r.responseCode);
+        console.log("Response = " + r.response);
+        console.log("Sent = " + r.bytesSent);
+        window.location = "index.html";
+
+    }
+
+    function fail(error) {
+        alert("An error has occurred: Code = " = error.code);
+        window.location = "index.html"
+    }
+    
+    function Comentario(){
+    	
+    	comentario = document.f1.comentario.value;
+    	comentario = comentario.replace(" ","_");
+     	var element = document.getElementById('geolocation');
+  		element.innerHTML='	<H1 onclick="setTipo(1);">Incendio</H1><br><H1 onclick="setTipo(2);">Accidentes</H1><br><H1 onclick="setTipo(3);">Medicas</H1><br><H1 onclick="setTipo(4);">Daños</H1>';
+  		var ayuda = document.getElementById('ayuda');
+  		ayuda.innerHTML="<input type='button' value='?' onclick='ayuda(2);'>";
+    }
+    
+
+    
+
+    
+
+    </script>
+
+  </head>
+  <body>
+      <div id="geolocation">
+     <H1> Obteniendo Coordenadas por favor espere...</H1>
+	</div>
+	<div id="ayuda">
+	</div>
+  </body>
+</html>
