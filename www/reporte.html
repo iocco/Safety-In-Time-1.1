@@ -23,9 +23,20 @@
     //
    function onBodyLoad() {
 
-        var options = {enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+       document.addEventListener("deviceready",onDeviceReady,false);
+
+
     } 
+                
+                
+   function onDeviceReady()
+   {
+       pictureSource=navigator.camera.PictureSourceType;
+       destinationType=navigator.camera.DestinationType;
+       var options = {enableHighAccuracy: true };
+       navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+       
+   }
 
     // Called when a photo is successfully retrieved
     //
@@ -55,12 +66,9 @@
     //
     function capturePhoto() {
       // Take picture using device camera and retrieve image as base64-encoded string
-              pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
       navigator.camera.getPicture(uploadPhoto, onFail, { quality: 50 });
     }
     function onSuccess(position) {
-							alert("6")
          					longitud=position.coords.longitude;
          					latitud=position.coords.latitude;
          					var element = document.getElementById('geolocation');
