@@ -13,18 +13,17 @@
     //
      function onBodyLoad()
                 {
-    				alert("Body Load")
-                    document.addEventListener("deviceready",onDeviceReady,false);
+         navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
                 }
     
     function onDeviceReady() {
-    	alert("Device Ready")
-        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
 
     // onSuccess Geolocation
     //
- /*   function onSuccess(position) {
+    function onSuccess(position) {
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -41,7 +40,7 @@
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
-    }*/
+    }
 
     </script>
   </head>
