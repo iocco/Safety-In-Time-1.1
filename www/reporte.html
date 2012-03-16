@@ -21,15 +21,15 @@
     // PhoneGap is ready to be used!
     //
    function onBodyLoad() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-        var options = {enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+        //pictureSource=navigator.camera.PictureSourceType;
+        //destinationType=navigator.camera.DestinationType;
+        //var options = {enableHighAccuracy: true };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
     } 
 
     // Called when a photo is successfully retrieved
     //
-    function onPhotoDataSuccess(imageData) {
+  /*  function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64 encoded image data
       // console.log(imageData);
 
@@ -45,7 +45,7 @@
       // The inline CSS rules are used to resize the image
       //
       smallImage.src = "data:image/jpeg;base64," + imageData;
-    }
+    }*/
 
     // Called when a photo is successfully retrieved
     //
