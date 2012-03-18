@@ -1,15 +1,23 @@
 <html>
 <script src="jquery-1.7.1.js">
 </script>
+<script src="phonegap-1.4.1.js">
+</script>
 <script type="text/javascript">
-	function load(){
-		
-		$('#facebook').load('http://www.smartpreventions.com/app/facebook.php');
-	}
+
+	
+    openExternal = function(url){
+        var link = x$('#linkhandler')[0];
+        link.href = url;
+        var clickevent = document.createEvent("UIEvents");
+        clickevent.initEvent('click', true, true);
+        link.dispatchEvent(clickevent);
+}
+	
 
 </script>
 
-<body  onload="load()">
+<body  onload="openExternal('http://www.smartpreventions.com/app/facebook.php')">
 	HOLIII
 	
 	<div id="facebook">
